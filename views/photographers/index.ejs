@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>妆造摄影工作室</title>
+    <title>我们的摄影师 - 妆造摄影工作室</title>
     <link rel="stylesheet" href="/css/style.css">
     <style>
         /* 轮播图样式 */
@@ -11,7 +11,8 @@
             position: relative;
             overflow: hidden;
             width: 100%;
-            height: 600px;
+            height: 400px;
+            margin-bottom: 3rem;
         }
         
         .carousel-container {
@@ -48,8 +49,8 @@
             padding: 2rem;
         }
         
-        .carousel-content h2 {
-            font-size: 3rem;
+        .carousel-content h1 {
+            font-size: 2.5rem;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
@@ -115,68 +116,18 @@
             right: 20px;
         }
         
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background-color: #ff6b6b;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .cta-button.secondary {
-            background-color: transparent;
-            border: 2px solid white;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        
-        .about-preview {
-            padding: 4rem 0;
-            background-color: #f9f9f9;
-            text-align: center;
-        }
-        
-        .about-preview h2 {
-            margin-bottom: 1.5rem;
-            color: #333;
-        }
-        
-        .about-preview p {
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            color: #666;
-            line-height: 1.8;
-        }
-        
-        .photographers-preview {
-            padding: 4rem 0;
-        }
-        
-        .photographers-preview h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .photographer-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+        /* 摄影师卡片样式 */
+        .photographers-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+        
+        .photographers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
         
         .photographer-card {
@@ -193,7 +144,7 @@
         
         .photographer-card img {
             width: 100%;
-            height: 250px;
+            height: 280px;
             object-fit: cover;
         }
         
@@ -210,6 +161,12 @@
             color: #ff6b6b;
             font-weight: bold;
             margin-bottom: 0.5rem;
+        }
+        
+        .photographer-experience {
+            color: #777;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
         }
         
         .photographer-description {
@@ -229,77 +186,47 @@
             text-decoration: underline;
         }
         
-        /* 用户区域样式 */
-        .user-area {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
+        .admin-actions {
+            margin-top: 2rem;
+            text-align: center;
         }
         
-        .user-toggle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+        .admin-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
             background-color: #ff6b6b;
             color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        
-        .user-menu {
-            position: absolute;
-            bottom: 70px;
-            right: 0;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            padding: 1rem;
-            width: 200px;
-            display: none;
-        }
-        
-        .user-menu.active {
-            display: block;
-        }
-        
-        .user-menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .user-menu ul li {
-            margin-bottom: 10px;
-        }
-        
-        .user-menu ul li a {
-            display: block;
-            padding: 8px 10px;
-            color: #333;
             text-decoration: none;
-            transition: background 0.3s;
             border-radius: 4px;
+            font-weight: bold;
+            margin: 0 10px;
         }
         
-        .user-menu ul li a:hover {
-            background-color: #f9f9f9;
-            color: #ff6b6b;
+        .admin-button:hover {
+            background-color: #ff5252;
         }
         
-        .user-menu .admin-section {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid #eee;
+        .no-photographers {
+            text-align: center;
+            padding: 3rem;
+            color: #777;
         }
         
-        .user-menu .admin-section h4 {
-            margin-bottom: 10px;
-            color: #ff6b6b;
+        .success-message, .error-message {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
         }
     </style>
 </head>
@@ -310,7 +237,7 @@
             <ul>
                 <li><a href="/">首页</a></li>
                 <li><a href="/services">服务</a></li>
-                <li><a href="/photographers">摄影师</a></li>
+                <li><a href="/photographers" class="active">摄影师</a></li>
                 <li><a href="/portfolio">作品</a></li>
                 <li><a href="/about">关于我们</a></li>
                 <% if (user) { %>
@@ -325,20 +252,16 @@
     </header>
 
     <main>
-        <!-- 轮播图部分替换原来的hero部分 -->
-        <section class="carousel" id="home-carousel">
+        <!-- 轮播图部分替换原来的banner部分 -->
+        <section class="carousel" id="photographer-carousel">
             <div class="carousel-container" id="carousel-container">
                 <!-- 轮播图内容将通过JavaScript动态加载 -->
                 <!-- 默认轮播图，如果API加载失败会显示这个 -->
                 <div class="carousel-slide">
-                    <img src="/images/hero-bg.jpg" alt="妆造摄影工作室">
+                    <img src="/images/photographers-banner.jpg" alt="摄影师团队">
                     <div class="carousel-content">
-                        <h2>打造属于你的完美形象</h2>
-                        <p>专业妆造与摄影服务，记录最美的瞬间</p>
-                        <div class="cta-buttons">
-                            <a href="/photographers" class="cta-button">我们的摄影师</a>
-                            <a href="/services" class="cta-button secondary">服务详情</a>
-                        </div>
+                        <h1>我们的专业摄影师团队</h1>
+                        <p>专业、细致、用心，为您记录每一个精彩瞬间</p>
                     </div>
                 </div>
             </div>
@@ -346,83 +269,56 @@
             <div class="carousel-arrow carousel-prev" id="carousel-prev">❮</div>
             <div class="carousel-arrow carousel-next" id="carousel-next">❯</div>
         </section>
-
-        <section class="about-preview">
-            <h2>关于我们</h2>
-            <p>妆造摄影工作室，是一家专注于提供高品质妆造与摄影服务的专业工作室。我们拥有经验丰富的化妆师和摄影师团队，致力于为客户打造独特、专属的形象，捕捉每一个珍贵瞬间。无论是个人写真、婚纱照，还是商业摄影，我们都能提供专业、细致的服务，满足您的各种需求。</p>
-            <a href="/about" class="cta-button">了解更多</a>
-        </section>
-
-        <section class="photographers-preview">
-            <h2>我们的摄影师</h2>
-            <div class="photographer-cards" id="photographer-cards">
-                <!-- 摄影师卡片将通过JS动态加载 -->
-            </div>
-        </section>
-
-        <section class="services-preview">
-            <h2>我们的服务</h2>
-            <div class="service-cards">
-                <!-- 服务卡片将通过JavaScript动态加载 -->
-            </div>
-        </section>
+        
+        <div class="photographers-container">
+            <% if (messages.success) { %>
+                <div class="success-message"><%= messages.success %></div>
+            <% } %>
+            <% if (messages.error) { %>
+                <div class="error-message"><%= messages.error %></div>
+            <% } %>
+            
+            <% if (photographers && photographers.length > 0) { %>
+                <div class="photographers-grid">
+                    <% photographers.forEach(photographer => { %>
+                        <div class="photographer-card">
+                            <img src="<%= photographer.avatar %>" alt="<%= photographer.name %>">
+                            <div class="photographer-info">
+                                <h3><%= photographer.name %></h3>
+                                <p class="photographer-specialty"><%= photographer.specialty %></p>
+                                <p class="photographer-experience"><%= photographer.experience %>年摄影经验</p>
+                                <p class="photographer-description"><%= photographer.description.substring(0, 100) %>...</p>
+                                <a href="/photographers/<%= photographer._id %>" class="view-profile">查看详情</a>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            <% } else { %>
+                <div class="no-photographers">
+                    <h2>暂无摄影师信息</h2>
+                    <p>请稍后再来查看，或联系管理员添加摄影师。</p>
+                </div>
+            <% } %>
+            
+            <% if (user && user.role === 'admin') { %>
+                <div class="admin-actions">
+                    <a href="/photographers/admin/add" class="admin-button">添加摄影师</a>
+                </div>
+            <% } %>
+        </div>
     </main>
 
     <footer>
         <p>&copy; 2024 妆造摄影工作室. 保留所有权利.</p>
     </footer>
-
-    <!-- 用户/管理区域 -->
-    <div class="user-area">
-        <div class="user-toggle" id="user-toggle">
-            <i>👤</i>
-        </div>
-        <div class="user-menu" id="user-menu">
-            <ul>
-                <% if (user) { %>
-                    <li><a href="/profile">我的账户</a></li>
-                    <% if (user.role === 'admin') { %>
-                        <div class="admin-section">
-                            <h4>管理员操作</h4>
-                            <li><a href="/photographers/admin/add">添加摄影师</a></li>
-                            <li><a href="/services/admin/add">添加服务</a></li>
-                            <li><a href="/admin/carousel?type=home">轮播图管理</a></li>
-                            <li><a href="/admin/dashboard">管理控制台</a></li>
-                        </div>
-                    <% } %>
-                    <li><a href="/auth/logout">退出登录</a></li>
-                <% } else { %>
-                    <li><a href="/auth/login">登录</a></li>
-                    <li><a href="/auth/register">注册</a></li>
-                <% } %>
-            </ul>
-        </div>
-    </div>
-
-    <script src="/js/main.js"></script>
+    
     <script>
-        // 用户菜单切换
-        document.getElementById('user-toggle').addEventListener('click', function() {
-            document.getElementById('user-menu').classList.toggle('active');
-        });
-        
-        // 点击页面其他区域关闭菜单
-        document.addEventListener('click', function(event) {
-            const userArea = document.querySelector('.user-area');
-            const userToggle = document.getElementById('user-toggle');
-            const userMenu = document.getElementById('user-menu');
-            
-            if (!userArea.contains(event.target) || (userMenu.contains(event.target) && event.target.tagName === 'A')) {
-                userMenu.classList.remove('active');
-            }
-        });
-        
         // 轮播图功能
         let carouselData = [];
         let currentSlide = 0;
         
         // 获取轮播图数据
-        fetch('/api/carousel?type=home')
+        fetch('/api/carousel?type=photographer')
             .then(response => response.json())
             .then(data => {
                 carouselData = data;
@@ -450,11 +346,8 @@
                 slideElement.innerHTML = `
                     <img src="${slide.image}" alt="${slide.title}">
                     <div class="carousel-content">
-                        <h2>${slide.title}</h2>
+                        <h1>${slide.title}</h1>
                         <p>${slide.description || ''}</p>
-                        ${slide.link ? `<div class="cta-buttons">
-                            <a href="${slide.link}" class="cta-button">查看详情</a>
-                        </div>` : ''}
                     </div>
                 `;
                 
@@ -513,33 +406,6 @@
             currentSlide = index;
             updateCarousel();
         }
-        
-        // 获取摄影师数据
-        fetch('/api/photographers')
-            .then(response => response.json())
-            .then(photographers => {
-                const photographerCards = document.getElementById('photographer-cards');
-                
-                // 只显示前3个摄影师
-                photographers.slice(0, 3).forEach(photographer => {
-                    const card = document.createElement('div');
-                    card.className = 'photographer-card';
-                    card.innerHTML = `
-                        <img src="${photographer.avatar}" alt="${photographer.name}">
-                        <div class="photographer-info">
-                            <h3>${photographer.name}</h3>
-                            <p class="photographer-specialty">${photographer.specialty}</p>
-                            <p class="photographer-description">${photographer.description.substring(0, 100)}...</p>
-                            <a href="/photographers/${photographer._id}" class="view-profile">查看详情</a>
-                        </div>
-                    `;
-                    photographerCards.appendChild(card);
-                });
-            })
-            .catch(error => {
-                console.error('获取摄影师数据失败:', error);
-                document.getElementById('photographer-cards').innerHTML = '<p>暂无摄影师数据</p>';
-            });
     </script>
 </body>
 </html> 

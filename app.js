@@ -79,14 +79,46 @@ passport.deserializeUser(async (id, done) => {
 
 // 路由
 app.use('/auth', require('./routes/auth'));
+app.use('/photographers', require('./routes/photographers'));
+app.use('/services', require('./routes/services'));
+app.use('/portfolio', require('./routes/portfolio'));
+app.use('/about', require('./routes/about'));
+app.use('/api', require('./routes/api'));
+app.use('/admin', require('./routes/admin'));
 
 // 首页路由
 app.get('/', (req, res) => {
     res.render('index', { user: req.user });
 });
 
+// 创建管理员账户函数
+const createAdminUser = async () => {
+    try {
+        // 检查是否已存在管理员
+        const adminExists = await User.findOne({ role: 'admin' });
+        if (adminExists) {
+            return console.log('管理员账户已存在');
+        }
+        
+        // 创建管理员账户
+        const admin = new User({
+            username: 'admin',
+            email: 'admin@example.com',
+            password: 'admin123', // 实际应用中应使用更安全的密码
+            role: 'admin'
+        });
+        
+        await admin.save();
+        console.log('管理员账户创建成功');
+    } catch (error) {
+        console.error('创建管理员账户失败:', error);
+    }
+};
+
 // 启动服务器
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`服务器运行在 http://localhost:${PORT}`);
+    // 创建默认管理员账户
+    createAdminUser();
 }); 

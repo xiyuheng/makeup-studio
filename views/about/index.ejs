@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们 - 妆造摄影工作室</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .banner {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/images/about-banner.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .banner-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .banner h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .banner p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .about-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: #333;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: #ff6b6b;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background-color: #eee;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            padding-right: calc(50% + 30px);
+            text-align: right;
+        }
+        
+        .timeline-item:nth-child(even) {
+            padding-left: calc(50% + 30px);
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background-color: #ff6b6b;
+            border-radius: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-content {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-title {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .timeline-description {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .team-section {
+            background-color: #f9f9f9;
+            padding: 4rem 0;
+        }
+        
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .team-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .team-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .team-info h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .team-role {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .contact-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 20px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .contact-icon {
+            font-size: 2.5rem;
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-title {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .contact-info {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .map-container {
+            margin-top: 3rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            height: 400px;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">妆造摄影工作室</div>
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li><a href="/services">服务</a></li>
+                <li><a href="/photographers">摄影师</a></li>
+                <li><a href="/portfolio">作品</a></li>
+                <li><a href="/about" class="active">关于我们</a></li>
+                <% if (user) { %>
+                    <li><a href="/profile"><%= user.username %></a></li>
+                    <li><a href="/auth/logout">退出</a></li>
+                <% } else { %>
+                    <li><a href="/auth/login">登录</a></li>
+                    <li><a href="/auth/register">注册</a></li>
+                <% } %>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="banner">
+            <div class="banner-content">
+                <h1>关于妆造摄影工作室</h1>
+                <p>用镜头记录美好，用专业打造品质，我们致力于为每位客户提供最优质的妆造摄影服务。</p>
+            </div>
+        </div>
+        
+        <section class="about-section">
+            <div class="section-title">
+                <h2>我们的故事</h2>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>妆造摄影工作室成立于2015年，由一群热爱摄影和妆造艺术的年轻人共同创立。我们秉承"专业、创新、真诚"的理念，致力于为客户提供高品质的妆造摄影服务。</p>
+                    <p>多年来，我们不断探索和创新，从最初的小型工作室发展成为如今拥有专业团队和完善设备的综合性摄影工作室。我们的团队成员均来自国内知名艺术院校，拥有丰富的实践经验和扎实的专业技能。</p>
+                    <p>我们深知每一张照片背后都承载着客户的期望与情感，因此我们始终坚持以客户需求为中心，精心设计每一个细节，力求在每一次服务中都能超越客户期望，创造出令人满意的作品。</p>
+                </div>
+                <div class="about-image">
+                    <img src="/images/about-story.jpg" alt="工作室故事">
+                </div>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2015年</div>
+                        <h3 class="timeline-title">工作室成立</h3>
+                        <p class="timeline-description">妆造摄影工作室正式成立，开始提供基础摄影服务。</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2017年</div>
+                        <h3 class="timeline-title">扩展服务范围</h3>
+                        <p class="timeline-description">引入专业妆造团队，开始提供全方位的妆造摄影服务。</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2019年</div>
+                        <h3 class="timeline-title">获得行业认可</h3>
+                        <p class="timeline-description">荣获"年度最佳婚纱摄影工作室"称号，作品多次获得国内摄影大赛奖项。</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2021年</div>
+                        <h3 class="timeline-title">工作室升级</h3>
+                        <p class="timeline-description">扩大工作室规模，引进国际先进设备，提升服务品质。</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023年</div>
+                        <h3 class="timeline-title">品牌升级</h3>
+                        <p class="timeline-description">全新品牌形象升级，推出更多个性化定制服务，满足客户多样化需求。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="team-section">
+            <div class="team-container">
+                <div class="section-title">
+                    <h2>我们的团队</h2>
+                </div>
+                
+                <div class="team-grid">
+                    <% if (photographers && photographers.length > 0) { %>
+                        <% photographers.forEach(photographer => { %>
+                            <div class="team-card">
+                                <img src="<%= photographer.avatar %>" alt="<%= photographer.name %>">
+                                <div class="team-info">
+                                    <h3><%= photographer.name %></h3>
+                                    <p class="team-role"><%= photographer.specialty %></p>
+                                    <a href="/photographers/<%= photographer._id %>" class="view-details" style="color: #ff6b6b; text-decoration: none;">查看详情</a>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #777;">暂无团队成员信息，请稍后查看。</p>
+                    <% } %>
+                </div>
+            </div>
+        </section>
+        
+        <section class="contact-section">
+            <div class="section-title">
+                <h2>联系我们</h2>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h3 class="contact-title">地址</h3>
+                    <p class="contact-info">北京市朝阳区建国路88号时代广场18层</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <h3 class="contact-title">电话</h3>
+                    <p class="contact-info">010-12345678<br>136-1234-5678</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3 class="contact-title">邮箱</h3>
+                    <p class="contact-info">info@makeupstudio.com<br>service@makeupstudio.com</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">🕒</div>
+                    <h3 class="contact-title">营业时间</h3>
+                    <p class="contact-info">周一至周六: 10:00 - 20:00<br>周日: 12:00 - 18:00</p>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3053.6279578043635!2d116.4586996!3d39.9105921!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35f1ac3a4758a35d%3A0x5769bea2a8200612!2z5YyX5Lqs5biC5pyd6Ziz5Yy66K6t5Z-O6Lev!5e0!3m2!1szh-CN!2scn!4v1648022801344!5m2!1szh-CN!2scn" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 妆造摄影工作室. 保留所有权利.</p>
+    </footer>
+</body>
+</html> 

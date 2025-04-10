@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= photographer.name %> - 妆造摄影工作室</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .photographer-profile {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 0 20px;
+        }
+        
+        .profile-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .profile-image {
+            flex: 0 0 300px;
+        }
+        
+        .profile-image img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .profile-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .profile-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .profile-specialty {
+            color: #ff6b6b;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .profile-experience {
+            color: #777;
+            margin-bottom: 1.5rem;
+        }
+        
+        .profile-description {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .contact-info {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .contact-info p {
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+        
+        .contact-label {
+            font-weight: bold;
+            display: inline-block;
+            width: 80px;
+        }
+        
+        .book-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: #ff6b6b;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        
+        .book-button:hover {
+            background-color: #ff5252;
+        }
+        
+        .portfolio-section {
+            margin-top: 3rem;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .section-header h2 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-header p {
+            color: #777;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .portfolio-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .portfolio-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .portfolio-info {
+            padding: 1rem;
+        }
+        
+        .portfolio-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .portfolio-category {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .portfolio-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+        
+        .view-portfolio {
+            display: inline-block;
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .view-portfolio:hover {
+            text-decoration: underline;
+        }
+        
+        .no-portfolios {
+            text-align: center;
+            padding: 2rem;
+            color: #777;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .admin-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .admin-button {
+            padding: 0.8rem 1.5rem;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .edit-button {
+            background-color: #4caf50;
+        }
+        
+        .add-portfolio-button {
+            background-color: #ff6b6b;
+        }
+        
+        .delete-button {
+            background-color: #f44336;
+        }
+        
+        .success-message, .error-message {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">妆造摄影工作室</div>
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li><a href="/services">服务</a></li>
+                <li><a href="/photographers" class="active">摄影师</a></li>
+                <li><a href="/portfolio">作品</a></li>
+                <li><a href="/about">关于我们</a></li>
+                <% if (user) { %>
+                    <li><a href="/profile"><%= user.username %></a></li>
+                    <li><a href="/auth/logout">退出</a></li>
+                <% } else { %>
+                    <li><a href="/auth/login">登录</a></li>
+                    <li><a href="/auth/register">注册</a></li>
+                <% } %>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="photographer-profile">
+            <% if (messages.success) { %>
+                <div class="success-message"><%= messages.success %></div>
+            <% } %>
+            <% if (messages.error) { %>
+                <div class="error-message"><%= messages.error %></div>
+            <% } %>
+            
+            <div class="profile-header">
+                <div class="profile-image">
+                    <img src="<%= photographer.avatar %>" alt="<%= photographer.name %>">
+                </div>
+                <div class="profile-info">
+                    <h1><%= photographer.name %></h1>
+                    <p class="profile-specialty"><%= photographer.specialty %></p>
+                    <p class="profile-experience"><%= photographer.experience %> 年摄影经验</p>
+                    <div class="profile-description">
+                        <p><%= photographer.description %></p>
+                    </div>
+                    <div class="contact-info">
+                        <h3>联系方式</h3>
+                        <p><span class="contact-label">邮箱：</span><%= photographer.contactInfo.email || '暂无' %></p>
+                        <p><span class="contact-label">电话：</span><%= photographer.contactInfo.phone || '暂无' %></p>
+                        <p><span class="contact-label">状态：</span><%= photographer.available ? '可预约' : '暂不接受预约' %></p>
+                    </div>
+                    <% if (photographer.available) { %>
+                        <a href="#contact-form" class="book-button">立即预约</a>
+                    <% } %>
+                </div>
+            </div>
+            
+            <div class="portfolio-section">
+                <div class="section-header">
+                    <h2><%= photographer.name %> 的作品集</h2>
+                    <p>探索这位摄影师的创意工作</p>
+                </div>
+                
+                <% if (portfolios && portfolios.length > 0) { %>
+                    <div class="portfolio-grid">
+                        <% portfolios.forEach(portfolio => { %>
+                            <div class="portfolio-card">
+                                <img src="<%= portfolio.mainImage %>" alt="<%= portfolio.title %>">
+                                <div class="portfolio-info">
+                                    <h3><%= portfolio.title %></h3>
+                                    <p class="portfolio-category"><%= portfolio.category %></p>
+                                    <p class="portfolio-description"><%= portfolio.description.substring(0, 80) %>...</p>
+                                    <a href="/portfolio/<%= portfolio._id %>" class="view-portfolio">查看详情</a>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                <% } else { %>
+                    <div class="no-portfolios">
+                        <h3>暂无作品集</h3>
+                        <p>该摄影师尚未上传作品集，敬请期待。</p>
+                    </div>
+                <% } %>
+                
+                <% if (user && user.role === 'admin') { %>
+                    <div class="admin-actions">
+                        <a href="/photographers/admin/edit/<%= photographer._id %>" class="admin-button edit-button">编辑摄影师</a>
+                        <a href="/photographers/<%= photographer._id %>/portfolio/add" class="admin-button add-portfolio-button">添加作品集</a>
+                        <form action="/photographers/admin/delete/<%= photographer._id %>" method="POST" onsubmit="return confirm('确定要删除此摄影师吗？这将同时删除所有关联的作品集！')">
+                            <button type="submit" class="admin-button delete-button">删除摄影师</button>
+                        </form>
+                    </div>
+                <% } %>
+            </div>
+            
+            <% if (photographer.available) { %>
+                <div id="contact-form" style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #eee;">
+                    <div class="section-header">
+                        <h2>预约 <%= photographer.name %></h2>
+                        <p>填写下方表单，我们会尽快与您联系</p>
+                    </div>
+                    
+                    <form action="/photographers/<%= photographer._id %>/book" method="POST" style="max-width: 600px; margin: 0 auto;">
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem;">您的姓名 *</label>
+                            <input type="text" name="name" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem;">联系电话 *</label>
+                            <input type="tel" name="phone" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem;">电子邮箱</label>
+                            <input type="email" name="email" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem;">期望拍摄日期</label>
+                            <input type="date" name="date" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem;">拍摄需求描述 *</label>
+                            <textarea name="requirements" required rows="5" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                        </div>
+                        <div style="text-align: center;">
+                            <button type="submit" class="book-button" style="border: none; cursor: pointer;">提交预约</button>
+                        </div>
+                    </form>
+                </div>
+            <% } %>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 妆造摄影工作室. 保留所有权利.</p>
+    </footer>
+</body>
+</html> 

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理控制台 - 妆造摄影工作室</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .admin-dashboard {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        
+        .admin-title {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .admin-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .admin-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .admin-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .admin-card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ff6b6b;
+        }
+        
+        .admin-card h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .admin-card-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.6rem 1.2rem;
+            background-color: #ff6b6b;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-card-link:hover {
+            background-color: #e05555;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/header') %>
+    
+    <main>
+        <section class="admin-dashboard">
+            <div class="admin-title">
+                <h1>管理控制台</h1>
+                <p>欢迎回来，<%= user.username %>!</p>
+            </div>
+            
+            <div class="admin-cards">
+                <div class="admin-card">
+                    <div class="admin-card-icon">👤</div>
+                    <h3>摄影师管理</h3>
+                    <p>添加、编辑和管理摄影师信息</p>
+                    <a href="/photographers" class="admin-card-link">管理摄影师</a>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="admin-card-icon">🎁</div>
+                    <h3>服务管理</h3>
+                    <p>添加、编辑和管理服务信息</p>
+                    <a href="/services" class="admin-card-link">管理服务</a>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="admin-card-icon">🖼️</div>
+                    <h3>作品集管理</h3>
+                    <p>添加、编辑和管理作品集</p>
+                    <a href="/portfolio" class="admin-card-link">管理作品集</a>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="admin-card-icon">🔄</div>
+                    <h3>首页轮播图</h3>
+                    <p>添加、编辑和管理首页轮播图</p>
+                    <a href="/admin/carousel?type=home" class="admin-card-link">管理首页轮播</a>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="admin-card-icon">🔄</div>
+                    <h3>摄影师轮播图</h3>
+                    <p>添加、编辑和管理摄影师轮播图</p>
+                    <a href="/admin/carousel?type=photographer" class="admin-card-link">管理摄影师轮播</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <%- include('../partials/footer') %>
+</body>
+</html> 

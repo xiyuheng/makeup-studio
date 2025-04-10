@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图管理 - 妆造摄影工作室</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .carousel-admin {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        
+        .carousel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .carousel-tabs {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .carousel-tab {
+            padding: 0.5rem 1.5rem;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-tab.active {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        .carousel-add {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background-color: #ff6b6b;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-add:hover {
+            background-color: #e05555;
+        }
+        
+        .carousel-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+        
+        .carousel-table th,
+        .carousel-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .carousel-table th {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+        
+        .carousel-table img {
+            width: 100px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .carousel-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .action-btn {
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .edit-btn {
+            background-color: #4dabf7;
+        }
+        
+        .delete-btn {
+            background-color: #fa5252;
+        }
+        
+        .carousel-empty {
+            text-align: center;
+            padding: 3rem;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../../partials/header') %>
+    
+    <main>
+        <section class="carousel-admin">
+            <div class="carousel-header">
+                <h1>轮播图管理</h1>
+                <a href="/admin/carousel/add?type=<%= currentType %>" class="carousel-add">添加轮播图</a>
+            </div>
+            
+            <div class="carousel-tabs">
+                <a href="/admin/carousel?type=home" class="carousel-tab <%= currentType === 'home' ? 'active' : '' %>">首页轮播图</a>
+                <a href="/admin/carousel?type=photographer" class="carousel-tab <%= currentType === 'photographer' ? 'active' : '' %>">摄影师轮播图</a>
+            </div>
+            
+            <% if (carousels && carousels.length > 0) { %>
+                <table class="carousel-table">
+                    <thead>
+                        <tr>
+                            <th>顺序</th>
+                            <th>图片</th>
+                            <th>标题</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% carousels.forEach(carousel => { %>
+                            <tr>
+                                <td><%= carousel.order %></td>
+                                <td><img src="<%= carousel.image %>" alt="<%= carousel.title %>"></td>
+                                <td><%= carousel.title %></td>
+                                <td><%= carousel.active ? '激活' : '停用' %></td>
+                                <td class="carousel-actions">
+                                    <a href="/admin/carousel/edit/<%= carousel._id %>" class="action-btn edit-btn">编辑</a>
+                                    <form action="/admin/carousel/delete/<%= carousel._id %>" method="POST" style="display: inline;" onsubmit="return confirm('确定要删除这个轮播图吗？');">
+                                        <button type="submit" class="action-btn delete-btn">删除</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            <% } else { %>
+                <div class="carousel-empty">
+                    <p>没有轮播图数据</p>
+                    <p>点击上方"添加轮播图"按钮创建第一个轮播图</p>
+                </div>
+            <% } %>
+            
+            <a href="/admin/dashboard" class="btn btn-secondary">返回控制台</a>
+        </section>
+    </main>
+    
+    <%- include('../../partials/footer') %>
+</body>
+</html> 

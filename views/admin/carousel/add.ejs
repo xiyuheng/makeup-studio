@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加轮播图 - 妆造摄影工作室</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .carousel-form {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .form-title {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            background-color: white;
+        }
+        
+        .form-check {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #e05555;
+        }
+        
+        .btn-secondary {
+            background-color: #e9ecef;
+            color: #495057;
+            text-decoration: none;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #dee2e6;
+        }
+        
+        .required::after {
+            content: '*';
+            color: red;
+            margin-left: 0.25rem;
+        }
+        
+        .image-preview {
+            max-width: 100%;
+            margin-top: 1rem;
+            border-radius: 4px;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .image-preview img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../../partials/header') %>
+    
+    <main>
+        <section class="carousel-form">
+            <div class="form-title">
+                <h1>添加轮播图</h1>
+            </div>
+            
+            <form action="/admin/carousel/add" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title" class="form-label required">标题</label>
+                    <input type="text" id="title" name="title" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description" class="form-label">描述</label>
+                    <textarea id="description" name="description" class="form-textarea"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="link" class="form-label">链接</label>
+                    <input type="text" id="link" name="link" class="form-input" placeholder="例如: /services">
+                </div>
+                
+                <div class="form-group">
+                    <label for="type" class="form-label required">轮播图类型</label>
+                    <select id="type" name="type" class="form-select" required>
+                        <option value="home" <%= type === 'home' ? 'selected' : '' %>>首页轮播图</option>
+                        <option value="photographer" <%= type === 'photographer' ? 'selected' : '' %>>摄影师轮播图</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="order" class="form-label">显示顺序</label>
+                    <input type="number" id="order" name="order" class="form-input" value="0" min="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="image" class="form-label required">轮播图片</label>
+                    <input type="file" id="image" name="image" class="form-input" accept="image/*" required onchange="previewImage(this)">
+                    <div class="image-preview" id="image-preview">
+                        <img id="preview-img" src="#" alt="预览图">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="checkbox" id="active" name="active" checked>
+                        <label for="active">激活</label>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <a href="/admin/carousel?type=<%= type %>" class="btn btn-secondary">取消</a>
+                    <button type="submit" class="btn btn-primary">保存轮播图</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    
+    <%- include('../../partials/footer') %>
+    
+    <script>
+        function previewImage(input) {
+            const preview = document.getElementById('image-preview');
+            const previewImg = document.getElementById('preview-img');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                previewImg.src = '#';
+                preview.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html> 
